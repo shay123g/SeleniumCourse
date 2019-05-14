@@ -41,7 +41,7 @@ public class Lesson01
         driver.get("https://www.google.com");
         System.out.println(driver.getWindowHandles());
         System.out.println(driver.getCurrentUrl());
-        driver.close();
+        driver.quit();
     }
 
 
