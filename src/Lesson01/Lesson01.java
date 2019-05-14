@@ -1,5 +1,7 @@
 package Lesson01;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
 public class Lesson01
@@ -34,6 +36,12 @@ public class Lesson01
     public void Test01_Test1()
     {
         System.out.println("Shay@Test1");
+        System.setProperty("webdriver.chrome.driver","C://Automation//libs//chromedriver.exe");
+        WebDriver driver=new ChromeDriver();
+        driver.get("https://www.google.com");
+        System.out.println(driver.getWindowHandles());
+        System.out.println(driver.getCurrentUrl());
+        driver.close();
     }
 
 
