@@ -1,4 +1,4 @@
-package IMDB;
+package Lesson01;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,15 +8,15 @@ import org.testng.annotations.Test;
 
 public class IMDB
 {
-    String URL,ExpectedTitle,Title;
-    WebDriver driver;
+    private String URL,ExpectedTitle;
+    private WebDriver driver;
 
     @BeforeClass
     public void InitVariables()
     {
         System.out.println("Initializing...");
         URL="http://imdb.com";
-        ExpectedTitle="IMDB";
+        ExpectedTitle= "Lesson01/IMDB";
         System.setProperty("webdriver.chrome.driver","C://Automation//libs//chromedriver.exe");
         driver = new ChromeDriver();
         driver.get(URL);
@@ -29,12 +29,13 @@ public class IMDB
     @Test
     public void Test02Refresh()
     {
+        System.out.println("Refresh page...");
         driver.navigate().refresh();
     }
     @Test
     public void Test03TitleCheck()
     {
-        Title=driver.getTitle();
+        String Title=driver.getTitle();
         if (Title.equals(ExpectedTitle))
             System.out.println("Title Match");
         else
