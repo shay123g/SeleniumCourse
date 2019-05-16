@@ -1,7 +1,6 @@
 package Lesson02;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeClass;
@@ -14,7 +13,9 @@ public class LocatorsBasic01
     public void InitVariables()
     {
         System.out.println("Initializing...");
-        System.setProperty("webdriver.chrome.driver","C://Automation//libs//chromedriver.exe");
+
+        System.setProperty("webdriver.chrome.driver","C://AutomationDrivers//chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver","C://Automation//libs//chromedriver.exe");
         System.setProperty("webdriver.chrome.silentOutput", "true");
         ChromeOptions options=new ChromeOptions();
         options.addArguments("disable-infobars");
