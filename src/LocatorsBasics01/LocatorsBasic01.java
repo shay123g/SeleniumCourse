@@ -1,4 +1,4 @@
-package Lesson05;
+package LocatorsBasics01;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
