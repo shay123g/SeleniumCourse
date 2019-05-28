@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class LocatorBasic02
 {
-    private WebDriver driver;
-    private ArrayList<WebElement> Elements;
+    public WebDriver driver;
+    public ArrayList<WebElement> Elements;
 
     @BeforeClass
     public void InitVariables()
@@ -37,14 +37,10 @@ public class LocatorBasic02
         Elements.add(driver.findElement(By.cssSelector("div[class='footer-sidebar-text jsl10n']")));
         Elements.add(driver.findElement(By.linkText("Wikimedia Foundation")));
         Elements.add(driver.findElement(By.xpath("//img[starts-with(@class,'central-featured')]")));
-    }
-    @Test
-    public void Print()
-    {
         for (int i=Elements.size()-1;i>=0;i--)
-        {
-            System.out.println("WebElement in position "+i+":"+Elements.get(i).toString());
-        }
+          System.out.println("WebElement in position "+i+":"+Elements.get(i).toString());
+
+
     }
 
     @AfterClass
