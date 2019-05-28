@@ -27,9 +27,8 @@ public class LocatorBasic02
         driver = new ChromeDriver(options);
         Elements=new ArrayList<>();
     }
-
     @Test
-    public void WikipediaIdentify()
+    public void Test01WikipediaIdentify()
     {
         driver.get("https://www.wikipedia.org/");
         Elements.add(driver.findElement(By.id("searchInput")));
@@ -37,12 +36,14 @@ public class LocatorBasic02
         Elements.add(driver.findElement(By.cssSelector("div[class='footer-sidebar-text jsl10n']")));
         Elements.add(driver.findElement(By.linkText("Wikimedia Foundation")));
         Elements.add(driver.findElement(By.xpath("//img[starts-with(@class,'central-featured')]")));
+    }
+    @Test
+    public void Test02Print()
+    {
         for (int i=Elements.size()-1;i>=0;i--)
-          System.out.println("WebElement in position "+i+":"+Elements.get(i).toString());
-
+            System.out.println("WebElement in position "+i+":"+Elements.get(i).toString());
 
     }
-
     @AfterClass
     public void Exit()
     {
