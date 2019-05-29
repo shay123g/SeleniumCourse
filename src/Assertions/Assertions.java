@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 public class Assertions
 {
     WebDriver driver;
-    String Whight,Height;
+    String BMI_res,message;
 
     @BeforeClass
     public void InitVariables()
@@ -36,18 +36,25 @@ public class Assertions
         driver.findElement(By.id("weight")).sendKeys("50");
         driver.findElement(By.id("hight")).sendKeys("30");
         driver.findElement(By.id("calculate_data")).click();
-        Whight=driver.findElement(By.id("weight")).getText();
+        BMI_res=driver.findElement(By.id("bmi_result")).getAttribute("value");
+        message=driver.findElement((By.id("bmi_means"))).getAttribute("value");
     }
     @Test
     public void Test02Assert()
     {
-        assertEquals("Height is not 30","30",Height);
-        assertEquals("Whight is not 50","50",Whight);
-        System.out.println("H:"+Height+ "W: "+Whight);
+        assertEquals("BMI result not as expected","556",BMI_res);
+        assertEquals("Message is not match","That you have overweight.",message);
     }
+
+    @Test
+    public void Test03ButtonCheck()
+    {
+        //assertEquals();
+    }
+
     @AfterClass
     public void Exit()
     {
-        driver.quit();
+       driver.quit();
     }
 }
