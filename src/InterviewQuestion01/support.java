@@ -12,25 +12,30 @@ public class support
     public void verifyElements(WebDriver driver)
     {
         List<WebElement> list;
-
         //get the first un-ordered list (this is the required list)
         list = driver.findElement(By.className("ms-list")).findElements(By.tagName("span"));
-
         //count=counter for construct string text: Elem 3, Elem 4...Elem N   count=3,4,5....N
         int count = 3;
+        int flag=0;
         //iterate until end of the list
         while (count <= list.size())
          {
                 String text = "elem " + count;
-                for (WebElement elem : list)
+                for (int j=2;j<list.size();j++)
                 {
-                    System.out.println(elem.getText());
-                    assertEquals(elem.getText(),text,text+ " not found in the left list");
-                    count++;
-                    break;
+                    String Actual=list.get(j).getText();
+                    if (!(Actual.equals(text)))
+                       flag=1;
+                    else
+                    {
+                        flag=0;
+                        count++;
+                        break;
+                    }
                 }
-                }
+                assertEquals(flag,0,text+" didnt exist in list");
          }
+       }
     }
 
 
