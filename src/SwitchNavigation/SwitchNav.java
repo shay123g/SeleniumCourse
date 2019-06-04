@@ -1,6 +1,5 @@
 package SwitchNavigation;
 
-import org.junit.After;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -10,7 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.Scanner;
+import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
@@ -19,6 +18,8 @@ public class SwitchNav
     ChromeDriver driver;
     String status;
     Alert pop;
+    Set<String> handlers;
+    String mainWindowHandle;
 
     @BeforeClass
     public void Init()
@@ -29,6 +30,7 @@ public class SwitchNav
         options.addArguments("disable-infobars");
         driver = new ChromeDriver(options);
         driver.navigate().to("http://atidcollege.co.il/Xamples/ex_switch_navigation.html");
+        mainWindowHandle=driver.getWindowHandle();
 
     }
     @Test
@@ -82,6 +84,34 @@ public class SwitchNav
         driver.switchTo().frame(iFrame);
         String IfrmMsg=driver.findElement(By.id("iframe_container")).getText();
         System.out.println("Iframe message: "+IfrmMsg);
+        driver.switchTo().parentFrame();
+    }
+
+    @Test
+    public void Test06_NewTab()
+    {
+        driver.findElement(By.id("btnNewTab")).click();
+        handlers=driver.getWindowHandles();
+        for (String handle:handlers)
+            if (mainWindowHandle!=handle)
+                driver.switchTo().window(handle);
+        String TabMessage=driver.findElement(By.id("new_tab_container")).getText();
+        System.out.println("New Tab Message: "+TabMessage);
+        handlers.clear();
+        assertEquals(TabMessage,"This is a new tab", "no match");
+    }
+    @Test
+    public void Test07_NewWindow()
+    {
+        driver.switchTo().window(mainWindowHandle);
+        driver.findElement(By.linkText("Open New Window")).click();
+        handlers=driver.getWindowHandles();
+        for (String handle:handlers)
+            if (driver.getWindowHandle()!=handle)
+                driver.switchTo().window(handle);
+        String WindowMessage=driver.findElement(By.id("new_window_container")).getText();
+        System.out.println("New Window Message: "+WindowMessage);
+        assertEquals(WindowMessage,"This is a new window", "no match");
     }
     @AfterClass
     public void Exit()
