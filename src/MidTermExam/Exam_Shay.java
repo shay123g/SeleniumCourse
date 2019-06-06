@@ -40,7 +40,7 @@ public class Exam_Shay
      */
     public void Test01_startingPriceValidate()
     {
-        assertEquals(driver.findElement(By.xpath("//div[@class='ginput_container']/span")).getText(),"$7.50","Starting price is not 7.5$ as expected");
+        assertEquals(driver.findElement(By.xpath("//div[@class='ginput_container']/span")).getText(),"$7.50","Starting price is not 7.50$ as expected");
     }
     @Test
     /**
@@ -57,7 +57,7 @@ public class Exam_Shay
         driver.findElement(By.id("input_5_22_6")).sendKeys("Gazit");
         comboBox.selectByValue("Delivery|3");
         FullName=driver.findElement(By.id("input_5_22_3")).getAttribute("value")+" "+driver.findElement(By.id("input_5_22_6")).getAttribute("value");
-        assertEquals(driver.findElement(By.xpath("//div[@class='ginput_container']/span")).getText(), "$10.50", "Starting price is not 10.50$ as expected");
+        assertEquals(driver.findElement(By.xpath("//div[@class='ginput_container']/span")).getText(), "$10.50", "price is not 10.50$ as expected");
     }
 
     @Test
