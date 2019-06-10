@@ -15,7 +15,7 @@ import static org.testng.Assert.*;
 public class Exam_Shay
 {
    private WebDriver driver;
-   private String FullName;
+   private String FullName,First,Last;
    private Alert popup;
 
    @BeforeClass
@@ -25,12 +25,13 @@ public class Exam_Shay
      */
    public void Init()
     {
-        FullName=new String("null");
         System.setProperty("webdriver.chrome.driver", "C://Automation//libs//chromedriver.exe");
         System.setProperty("webdriver.chrome.silentOutput", "true");
         driver=new ChromeDriver();
         driver.navigate().to("http://atidcollege.co.il/Xamples/pizza/");
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        First="Shay";
+        Last="Gazit";
     }
 
     @Test
@@ -53,8 +54,8 @@ public class Exam_Shay
     public void Test02_fillForm_ValidateNewPrice()
     {
         Select comboBox = new Select(driver.findElement(By.id("input_5_21")));
-        driver.findElement(By.id("input_5_22_3")).sendKeys("Shay");
-        driver.findElement(By.id("input_5_22_6")).sendKeys("Gazit");
+        driver.findElement(By.id("input_5_22_3")).sendKeys(First);
+        driver.findElement(By.id("input_5_22_6")).sendKeys(Last);
         comboBox.selectByValue("Delivery|3");
         FullName=driver.findElement(By.id("input_5_22_3")).getAttribute("value")+" "+driver.findElement(By.id("input_5_22_6")).getAttribute("value");
         assertEquals(driver.findElement(By.xpath("//div[@class='ginput_container']/span")).getText(), "$10.50", "price is not 10.50$ as expected");
@@ -69,7 +70,7 @@ public class Exam_Shay
      */
     public void Test03_FillCupon_SendAndValidate()
     {
-        WebElement iFrame = driver.findElement(By.xpath("//li/iframe[@src='coupon.html']"));
+        WebElement iFrame = driver.findElement(By.xpath("//iframe[@src='coupon.html']"));
         driver.switchTo().frame(iFrame);
         String Cupon = driver.findElement(By.id("coupon_Number")).getText();
         driver.switchTo().parentFrame();
@@ -77,7 +78,9 @@ public class Exam_Shay
         driver.findElement(By.id("input_5_20")).sendKeys(Cupon);
         driver.findElement(By.id("gform_submit_button_5")).click();
         popup = driver.switchTo().alert();
-        assertEquals(popup.getText(), ExpectedAlertMsg, "The Alert message not display full name and cupon code");
+        String ActualAlertMsg=popup.getText();
+        popup.accept();
+        assertEquals(ActualAlertMsg, ExpectedAlertMsg, "The Alert message not display full name and cupon code");
     }
     /**
      * the Finish() is the last method that executed last. it close the alert popup by clicking OK and close the browser window
@@ -85,7 +88,6 @@ public class Exam_Shay
     @AfterClass
     public void Finish()
     {
-        popup.accept();
         driver.quit();
     }
 
