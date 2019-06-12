@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Environment>
+    <ChromeDriverPath>C://Automation//libs//chromedriver.exe</ChromeDriverPath>
+    <url>http://atidcollege.co.il/Xamples/bmi/</url>
+    <whightValue>50</whightValue>
+    <heightValue>30</heightValue>
+</Environment>

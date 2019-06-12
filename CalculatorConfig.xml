@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Environment>
+    <RowValue>10</RowValue>
+    <ColValue>10</ColValue>
+    <ChromeDriverPath>C://Automation//libs//chromedriver.exe</ChromeDriverPath>
+    <URL>http://juliemr.github.io/protractor-demo/</URL>
+
+</Environment>
+
+
