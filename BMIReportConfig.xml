@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Environment>
+    <ChromeDriverPath>C:/Automation/libs/chromedriver.exe</ChromeDriverPath>
+    <ChromeSilent>true</ChromeSilent>
+    <Options>disable-infobars</Options>
+    <Url>http://atidcollege.co.il/Xamples/bmi/</Url>
+    <Report>
+        <ReportPath>C:/Automation/workspace/SeleniumCourse/src/Reports/</ReportPath>
+        <ReportFile>report.html</ReportFile>
+        <Name1>BMI Test Report - fill details and calculate</Name1>
+        <Description>Sample description for test</Description>
+        <Name2>BMI Test Report - Asserions</Name2>
+    </Report>
+    <Input>
+        <Height>50</Height>
+        <Whight>50</Whight>
+    </Input>
+</Environment>
+
+

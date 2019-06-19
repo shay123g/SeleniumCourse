@@ -11,9 +11,13 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -26,72 +30,56 @@ public class BMIWithreport
         ExtentReports report;
         ExtentTest report_test;
 
-        @AfterMethod
-        public  void ReportClose()
-        {
-            report.endTest(report_test);
-        }
+
         @BeforeClass
-        public void InitVariables ()
+        public void InitVariables () throws IOException, SAXException, ParserConfigurationException
         {
-            System.out.println("Initializing...");
-            System.setProperty("webdriver.chrome.driver", "C://Automation//libs//chromedriver.exe");
-            System.setProperty("webdriver.chrome.silentOutput", "true");
+            System.setProperty("webdriver.chrome.driver", LogicClass.getData("ChromeDriverPath"));
+            System.setProperty("webdriver.chrome.silentOutput", LogicClass.getData("ChromeSilent"));
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("disable-infobars");
+            options.addArguments(LogicClass.getData("Options"));
             driver = new ChromeDriver(options);
-            report=new ExtentReports("C://Automation//workspace//SeleniumCourse//src//Reports//report.html");
+            driver.manage().window().maximize();
+            report=new ExtentReports(LogicClass.getData("ReportPath")+LogicClass.getData("ReportFile"));
         }
 
-
+    @AfterMethod
+    public  void ReportClose()
+    {
+        report.endTest(report_test);
+    }
         @Test
-        public void Test01FillAndCalc () throws IOException
+        public void Test01FillAndCalc () throws IOException, ParserConfigurationException, SAXException
         {
             try
             {
-                report_test=report.startTest("BMI Test Report - fill details and calculate","Sample description for test");
-                driver.get("http://atidcollege.co.il/Xamples/bmi/");
+                report_test=report.startTest(LogicClass.getData("Name1"),LogicClass.getData("Description"));
+                driver.get(LogicClass.getData("Url"));
                 report_test.log(LogStatus.PASS,"BMI page loaded successfully");
-                driver.findElement(By.id("weixght")).sendKeys("50");
+                driver.findElement(By.id("weight")).sendKeys(LogicClass.getData("Whight"));
                 report_test.log(LogStatus.PASS,"weight data entered successfully");
-                driver.findElement(By.id("hight")).sendKeys("30");
+                driver.findElement(By.id("hight")).sendKeys(LogicClass.getData("Height"));
                 report_test.log(LogStatus.PASS,"height data entered successfully");
                 driver.findElement(By.id("calculate_data")).click();
                 report_test.log(LogStatus.PASS,"Button clicked successfully");
                 BMI_res = driver.findElement(By.id("bmi_result")).getAttribute("value");
                 message = driver.findElement((By.id("bmi_means"))).getAttribute("value");
+                assertEquals("BMI result not as expected", "200", BMI_res);
+                assertEquals("Message is not match", "That you have overweight.", message);
 
             }
-            catch (Exception e)
+            catch (NoSuchElementException e)
             {
-
-                File SrcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-                FileUtils.copyFile(SrcFile, new File("C://Automation//workspace//SeleniumCourse//src//Reports//screen1.jpg"));
-                report_test.log(LogStatus.FAIL,"test was failed " + e+report_test.addScreenCapture("C://Automation//workspace//SeleniumCourse//src//Reports//screen1.jpg"));
-                fail();
+                report_test.log(LogStatus.FAIL,"test was failed. Element not found on the page" + e.getMessage() + report_test.addScreenCapture(TakeScreenShot()));
+                fail("Test failed, See error in report");
             }
+            catch(AssertionError e)
+            {
+                report_test.log(LogStatus.FAIL,"test Assertion failed " +e.getMessage()+ report_test.addScreenCapture(TakeScreenShot()));
+                fail("Test failed, See error in report");
+            }
+
         }
-        @Test
-        public void Test02Assert () throws IOException
-        {
-            try
-            {
-                report_test = report.startTest("BMI Test Report - Asserions", "Sample description for test");
-                assertEquals("BMI result not as expected", "556", BMI_res);
-                report_test.log(LogStatus.PASS, "BMI Result assertion passed successfully ");
-                assertEquals("Message is not match", "That you hagve overweight.", message);
-                report_test.log(LogStatus.PASS, "message to the user passed successfully");
-            }
-            catch (Exception e)
-            {
-                File SrcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-                FileUtils.copyFile(SrcFile, new File("C://Automation//workspace//SeleniumCourse//src//Reports//screen2.jpg"));
-                report_test.log(LogStatus.FAIL,"test was failed " + e+report_test.addScreenCapture("C://Automation//workspace//SeleniumCourse//src//Reports//screen2.jpg"));
-                fail();
-            }
-        }
-
-
 
         @AfterClass
         public void Exit ()
@@ -99,6 +87,15 @@ public class BMIWithreport
             report.flush();
             report.close();
             driver.quit();
+        }
+
+        public String TakeScreenShot() throws IOException, ParserConfigurationException, SAXException
+        {
+            String filename=new SimpleDateFormat(("yyyyMMddHHmm'.jpg'")).format(new Date());
+            String path=LogicClass.getData("ReportPath")+filename;
+            File SrcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(SrcFile, new File(path));
+            return path;
         }
 
     }
