@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Environment>
+    <ChromeDriverPath>C:/Automation/libs/chromedriver.exe</ChromeDriverPath>
+    <ChromeSilent>true</ChromeSilent>
+    <Options>disable-infobars</Options>
+    <Url>http://todomvc.com/examples/react</Url>
+    <Report>
+        <ReportPath>C:/Automation/workspace/SeleniumCourse/src/Interview_TodoList</ReportPath>
+        <ReportFile>report.html</ReportFile>
+        <Test1>New task</Test1>
+        <Description1>Create new task</Description1>
+        <Name2>BMI Test Report - Asserions</Name2>
+    </Report>
+    <Task>
+        <TaskName>Task 1</TaskName>
+    </Task>
+</Environment>
