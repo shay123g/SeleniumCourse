@@ -1,4 +1,5 @@
-package InterviewQuestion01;
+package KefelBoard_Interview;
+
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
