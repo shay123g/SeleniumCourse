@@ -1,4 +1,4 @@
-package SuperCalculator;
+package SuperCalc_Interview;
 
 import org.openqa.selenium.WebElement;
 import org.w3c.dom.Document;
