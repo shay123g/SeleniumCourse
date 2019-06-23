@@ -30,7 +30,7 @@ public class Logic
 
     public static String TakeScreenShot(WebDriver driver) throws IOException, ParserConfigurationException, SAXException
     {
-        String filename=new SimpleDateFormat(("yyyyMMddHHmm'.jpg'")).format(new Date());
+        String filename=new SimpleDateFormat(("yyyyMMddHHmmss'.jpg'")).format(new Date());
         String path= Logic.ReadConfig("ReportPath")+filename;
         File SrcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(SrcFile, new File(path));

@@ -8,8 +8,13 @@
         <ReportPath>C:/Automation/workspace/SeleniumCourse/src/Interview_TodoList</ReportPath>
         <ReportFile>report.html</ReportFile>
         <Test1>New task</Test1>
+        <Test2> Rename task</Test2>
+        <Test3> Complete task</Test3>
+        <Test4>Delete task</Test4>
         <Description1>Create new task</Description1>
-        <Name2>BMI Test Report - Asserions</Name2>
+        <Description2>Rename Task</Description2>
+        <Description3>Mark task as complete</Description3>
+        <Description4>Delete task</Description4>
     </Report>
     <Task>
         <TaskName>Task 1</TaskName>
