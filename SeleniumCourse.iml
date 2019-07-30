@@ -12,5 +12,6 @@
     <orderEntry type="library" name="TestNG-6.14.3" level="project" />
     <orderEntry type="library" name="extentreports-java-2.41" level="project" />
     <orderEntry type="library" name="Sikuli" level="project" />
+    <orderEntry type="library" name="Winium" level="project" />
   </component>
 </module>
