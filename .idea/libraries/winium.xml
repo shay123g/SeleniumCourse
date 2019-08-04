@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="winium">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../libs/winium" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../libs/winium" recursive="false" />
+  </library>
+</component>
